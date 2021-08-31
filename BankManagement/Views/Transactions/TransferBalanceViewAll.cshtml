@@ -1,0 +1,157 @@
+﻿@model BalanceTransferViewModel
+
+@{
+    ViewData["Title"] = "TransferBalanceViewAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+</head>
+
+
+<body>
+
+
+    <br />
+    <br />
+
+
+    <div class="container">
+
+
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Transfer Money</h1>
+            <p class="lead">Start here to transfer money between accounts </p>
+            <hr class="my-4">
+            <br />
+            <br />
+            <form asp-action="TransferBalance">
+
+                <table align="center">
+                    <tr>
+
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Sender Account ID</span>
+                                </div>
+                                &nbsp;
+                                <input disabled required type="number" asp-for="senderAccountID" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span style="color:red;" asp-validation-for="senderAccountID" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Receiver Account ID</span>
+                                </div>
+                                &nbsp;
+                                <input required type="number" asp-for="receiverAccountID" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span style="color:red;" asp-validation-for="senderAccountID" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+                        </td>
+
+
+
+                    </tr>
+
+                    <tr>
+                        <td>
+
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Amount to Send</span>
+                                </div>
+                                &nbsp;
+                                <input required type="number" asp-for="moneyToSend" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                <div class="input-group-prepend">
+                                    <span style="color:red;" asp-validation-for="senderAccountID" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                @Html.HiddenFor(view => view.senderAccountID)
+
+                <button type="submit" class="btn btn-success btn-lg">Start Transfer</button>
+            </form>
+            <br />
+
+            @if (ViewData["SenderMessage"] != null)
+            {
+                @if (ViewData["SenderMessage"].Equals("Display"))
+                {
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm"> Sender Account ID not found </button>
+                            </td>
+                        </tr>
+                    </table>
+
+                }
+            }
+
+            @if (ViewData["ReceiverMessage"] != null)
+            {
+                @if (ViewData["ReceiverMessage"].Equals("Display"))
+                {
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm"> Receiver Account ID not found </button>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            }
+
+            @if (ViewData["NegativeBalance"] != null)
+            {
+
+                @if (ViewData["NegativeBalance"].Equals("Display"))
+                {
+
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm"> Money to be sent cannot be negative </button>
+                            </td>
+                        </tr>
+                    </table>
+
+                }
+            }
+            <br />
+            <br />
+            <br />
+            <table align="center">
+                <tr>
+                    <td>
+                        <a asp-action="Index" asp-controller="Transactions" class="btn btn-success btn-block btn-lg">Back to the Index Page</a>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+
+
+</body>
+

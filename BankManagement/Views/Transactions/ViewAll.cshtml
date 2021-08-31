@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Account>
+
+
+    <head>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/transfer.css" />
+    </head>
+
+
+    <body>
+
+        <h1>View All Accounts</h1>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <td>Account ID</td>
+                    <td>Customer ID</td>
+                    <td>Type</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (Account a in Model)
+                {
+                <tr>
+                    <td>@a.AID</td>
+                    <td>@a.CID</td>
+                    <td>@a.AccountType</td>
+                    <td>@Html.ActionLink("Transfer Balance", "TransferBalanceViewAll", new { AID = a.AID })</td>
+                    <td>@Html.ActionLink("Deposit", "Deposit", new { AID = a.AID })</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </body>

@@ -1,0 +1,186 @@
+﻿
+
+@using BankManagement.ViewModels;
+@model AddDropDownForm;
+
+
+<head>
+
+</head>
+
+
+<body>
+
+    <br />
+    <br />
+
+    <div class="container">
+
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Add Account</h1>
+            <p class="lead">Start here to add an account for the customer </p>
+            <hr class="my-4">
+            <br />
+            <br />
+            <form asp-action="Add">
+
+                <table align="center">
+
+
+
+                    <tr>
+
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Customer ID</span>
+                                </div>
+                                &nbsp;
+                                <select select class="form-select " aria-label="Default select example" id="CID" asp-for="account.CID" asp-items="@(new SelectList(Model.customers,"CID","CID"))"></select>
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span asp-validation-for="account.CID" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Account Type</span>
+                                </div>
+                                &nbsp;
+                                <select asp-for="account.AccountType" select class="form-select " aria-label="Default select example" id="CID">
+                                    <option value="Checking">Checking</option>
+                                    <option value="Savings">Savings</option>
+                                </select>
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span asp-validation-for="account.AccountType" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Starting Balance</span>
+                                </div>
+                                &nbsp;
+                                <input required type="number" asp-for="account.Balance" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                <div class="input-group-prepend">
+                                    <span asp-validation-for="account.Balance" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <button type="submit" class="btn btn-success btn-lg">Add Account</button>
+            </form>
+            <br />
+
+            @if (ViewData["AddSuccessMessage"] != null)
+            {
+                @if (ViewData["AddSuccessMessage"].Equals("Display"))
+                {
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-dark btn-sm"> New account has been created for the customer  </button>
+                            </td>
+                        </tr>
+                    </table>
+
+                }
+            }
+
+            @if (ViewData["AddFailMessage"] != null)
+            {
+                @if (ViewData["AddFailMessage"].Equals("Display"))
+                {
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm"> New account could not be created  </button>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                }
+            }
+
+
+            @if (ViewData["AddBalanceMessage"] != null)
+            {
+                @if (ViewData["AddBalanceMessage"].Equals("Display"))
+                {
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm"> Depsoit Amount Cannot be Negative </button>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                }
+
+            }
+
+
+            @if (ViewData["AddDuplicate"] != null)
+            {
+                @if (ViewData["AddDuplicate"].Equals("Display"))
+                {
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm">Customer with the selected ID already has a @ViewData["AccountType"] Account </button>
+                            </td>
+                        </tr>
+                    </table>
+
+                }
+
+            }
+
+
+
+            <br />
+            <br />
+            <br />
+            <table align="center">
+                <tr>
+                    <td>
+                        <a asp-action="Index" asp-controller="Account" class="btn btn-success btn-block btn-lg">Back to the Index Page</a>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+
+
+
+

@@ -1,0 +1,223 @@
+﻿
+@model PaginatedList<BankManagement.Models.Customer>
+
+<head>
+
+    <link href="./css/Common/CommonStyle.css" rel="stylesheet" />
+
+</head>
+
+
+
+<body>
+
+    <br />
+    <br />
+
+    <form asp-action="Index" method="get">
+
+        <table id="searchtable" align="center">
+            <tr>
+                <td>
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                        </div>
+                        <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-mb">
+                        &nbsp;
+                    </div>
+
+                </td>
+
+                <td>
+
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                        </div>
+                        <select name="searchField" select class="form-select" aria-label="Default select example" id="CID">
+
+                            <option value="CID">CID</option>
+                            <option value="SSN">SSN</option>
+                            <option value="Name">Name</option>
+                            <option value="Age">Age</option>
+                            <option value="Address1">Address1</option>
+                            <option value="Address2">Address2</option>
+                            <option value="City">City</option>
+                            <option value="State">State</option>
+                            <option value="LastUpdated">Last Updated</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <input type="submit" value="Search" class="btn btn-success btn-mb">
+                    </div>
+
+                </td>
+            </tr>
+
+        </table>
+
+        <table id="searchleft" align="left">
+            <tr>
+                <td>
+                    <h5>Customer's list</h5>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+
+
+    <br />
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CIDSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Customer ID</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SSNSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">SSN</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["AgeSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Age</a>
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["Address1SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Address1</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["Address2SortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Address2</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">City</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["StateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">State</a>
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastUpdatedSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Last Updated</a>
+                </th>
+
+                <th colspan="1" style="text-align: center;">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (Customer customer in Model)
+
+            {
+            <tr>
+
+                <td>
+                    @customer.CID
+                </td>
+
+                <td>
+                    @customer.SSN
+                </td>
+
+                <td>
+                    @customer.Name
+                </td>
+
+                <td>
+                    @customer.Age
+                </td>
+
+
+                <td>
+                    @customer.Address1
+                </td>
+
+                <td>
+                    @customer.Address2
+                </td>
+                <td>
+                    @customer.City
+                </td>
+                <td>
+                    @customer.State
+                </td>
+
+
+
+                <td>
+                    @customer.LastUpdated
+                </td>
+
+                <td>
+                    <form asp-action="AddFromViewAll" method="get">
+                        <input type="hidden" name="CID" value=@customer.CID />
+                        <button type="submit" class="btn btn-dark btn-group-sm">Add Account</button>
+                    </form>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <table align="center">
+
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <tr>
+            <td>
+                <a asp-action="customerPagination"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @prevDisabled">
+                    Previous
+                </a>
+            </td>
+            <td>
+                <a asp-action="customerPagination"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @nextDisabled">
+                    Next
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <br />
+    <table align="center">
+        <tr>
+            <td>
+                <a asp-action="Index" asp-controller="Account" class="btn btn-success btn-block btn-lg">Back to Customer List</a>
+            </td>
+        </tr>
+    </table>
+
+</body>
+

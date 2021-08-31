@@ -1,0 +1,177 @@
+﻿
+
+@model PaginatedList<BankManagement.Models.Account>
+
+<head>
+
+
+</head>
+
+<body>
+
+    <div class="navbarfirstchild">
+        <a asp-controller="Account" asp-action="ViewAll">View All</a>
+        <a asp-controller="Account" asp-action="AddView">Add Account</a>
+        <a asp-controller="Account" asp-action="Delete">Delete Account</a>
+        <a asp-controller="Account" asp-action="Search">Search Account</a>
+    </div>
+    <br />
+    <br />
+    <br />
+
+    <form asp-action="Index" method="get">
+
+        <table id="searchtable" align="center">
+            <tr>
+                <td>
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                        </div>
+                        <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-mb">
+                        &nbsp;
+                    </div>
+
+                </td>
+
+                <td>
+
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                        </div>
+                        <select name="searchField" select class="form-select" aria-label="Default select example" id="CID">
+                            <option value="AID">Account ID</option>
+                            <option value="CID">Customer ID</option>
+                            <option value="AccountType">AccountType</option>
+                            <option value="Balance">Balance</option>
+                            <option value="LastUpdated">Last Updated</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <input type="submit" value="Search" class="btn btn-success btn-mb">
+                    </div>
+
+                </td>
+            </tr>
+
+        </table>
+
+        <table id="searchleft" align="left">
+            <tr>
+                <td>
+                    <h5>Account list</h5>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+
+
+    <br />
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["AIDSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Account ID</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CIDSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Customer ID</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["AccountTypeSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Account Type</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Balance</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastUpdatedSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Last Updated</a>
+                </th>
+                <th colspan="2" style="text-align: center;">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Account account in Model)
+            {
+            <tr>
+                <td>
+                    @account.AID
+                </td>
+                <td>
+                    @account.CID
+                </td>
+                <td>
+                    @account.AccountType
+                </td>
+                <td>
+                    $@((double)account.Balance)
+                </td>
+                <td>
+                    @account.LastUpdated
+                </td>
+
+
+                <td>
+                    <span id="gg" class="btn btn-dark btn-group-sm">@Html.ActionLink("Details", "ViewDetails", account)</span>
+                </td>
+            
+
+                <td>
+                    <form asp-action="Delete" method="get">
+                        <input type="hidden" name="AID" value=@account.AID />
+                        <button type="submit" class="btn btn-danger btn-group-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <table align="center">
+
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <tr>
+            <td>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @prevDisabled">
+                    Previous
+                </a>
+            </td>
+            <td>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @nextDisabled">
+                    Next
+                </a>
+            </td>
+        </tr>
+    </table><br />
+
+    <div style="text-align: center;">
+        <a href="https://localhost:5001/Account/customerPagination"><button style="background-color: #009879; color: #ffffff;" type="button">Smart Add</button></a>
+    </div>
+</body>

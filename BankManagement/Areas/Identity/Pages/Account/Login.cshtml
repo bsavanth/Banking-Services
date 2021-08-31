@@ -1,0 +1,101 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<head>
+    <link href="./css/Common/CommonStyle.css" rel="stylesheet" />
+</head>
+<body>
+
+    <br />
+    <br />
+    <br />
+    <div class="container">
+
+        <div class="jumbotron text-center">
+            <h1 style="color:red;" class="display-4"><b>Log in</b></h1>
+            <p class="lead">Use a local account to log in</p>
+            <hr class="my-4">
+            <br />
+            <br />
+            <form id="account" method="post">
+
+                <table align="center">
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+                                </div>
+                                &nbsp;
+                                <input required type="email" asp-for="Input.Email" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span  style ="color:red"  asp-validation-for="Input.Email" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Password</span>
+                                </div>
+                                &nbsp;
+                                <input required type="password" asp-for="Input.Password" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span style ="color:red" asp-validation-for="Input.Password" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="Input.RememberMe" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                   Remember me?
+                                </label>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+
+                <table align="center">
+                     <tr>
+                         <td>
+                             <button type="submit" class="btn btn-primary btn-block btn-lg">Log in</button>
+                         </td>
+                        </tr>
+                </table>
+
+                <br />
+                <br />
+
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <a id="forgot-password" asp-page="./ForgotPassword" class="btn btn-dark btn-sm">Forget   Password</a>
+                            </td>
+                        </tr>
+                    </table>
+            </form>
+                            
+        </div>
+    </div>
+
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

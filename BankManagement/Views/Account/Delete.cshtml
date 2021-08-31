@@ -1,0 +1,67 @@
+﻿@using BankManagement.ViewModels
+@model FormViewModel
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <h1>Delete</h1>
+
+    <form asp-action="Delete">
+
+        <table>
+            <tr>
+                <td>
+                    Input
+                </td>
+                <td>
+                    <input type="number" asp-for="ID" />
+                </td>
+                <td>
+                    <select asp-for="selection">
+                        <option value="SSN">SSN</option>
+                        <option value="CID">CID</option>
+                    </select>
+                </td>
+                <td>
+                    <span asp-validation-for="ID"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="Delete Start" />
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</body>
+
+@if (ViewBag.CIDMessage != null)
+{
+    @if (ViewBag.CIDMessage == "DoNotDisplay")
+    {
+        <p style="color:red"> Customer ID not in the database </p>
+    }
+}
+
+@if (ViewBag.SSNMessage != null)
+{
+    @if (ViewBag.SSNMessage == "DoNotDisplay")
+    {
+        <p style="color:red"> SSN number not in the database </p>
+    }
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    @if (ViewBag.ErrorMessage == "DoNotDisplay")
+    {
+        <p style="color:red">Invalid Input, Try Again </p>
+    }
+}
+
+
+

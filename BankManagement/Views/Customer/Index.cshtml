@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<BankManagement.Models.Customer>
+@{ ViewData["Title"] = "Index"; }
+
+<br />
+<br />
+
+<table align="center">
+    <tr>
+        <td>Customer List</td>
+    </tr>
+</table>
+<br />
+<br />
+
+<link href="./css/Common/CommonStyle.css" rel="stylesheet" />
+
+<div id="view-all">
+    @await Html.PartialAsync("_ViewAll", Model)
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

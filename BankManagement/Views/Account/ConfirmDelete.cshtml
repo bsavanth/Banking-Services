@@ -1,0 +1,85 @@
+﻿
+@model Account
+@{
+    ViewData["Title"] = "ConfirmDelete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ConfirmDelete</h1>
+
+<form asp-action="PostDelete">
+
+
+
+    <table class="table table-bordered">
+
+        <tr>
+            <td>
+                @Html.LabelFor(account => account.CID)
+            </td>
+
+            <td>
+                @Model.CID
+            </td>
+
+
+            <td>
+                @Html.LabelFor(account => account.AccountType)
+            </td>
+
+
+
+            <td>
+                @Model.AccountType
+            </td>
+
+
+
+            <td>
+                <span asp-validation-for="AccountType"></span>
+            </td>
+
+
+
+
+            <td>
+                @Html.LabelFor(account => account.Balance)
+            </td>
+
+
+
+            <td>
+                @Model.Balance
+            </td>
+
+
+        <tr>
+            <td>
+                <input type="submit" value="Delete" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.ActionLink("Start again", "Delete")
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</form>
+
+@if (ViewBag.MessageSuccess != null)
+{
+    @if (ViewBag.MessageSuccess == "DoNotDisplay")
+    {
+        <p style="color:red"> Delete Failed </p>
+    }
+    @if (ViewBag.MessageSuccess == "Display")
+    {
+        <p style="color:green"> Delete Success </p>
+    }
+}
+

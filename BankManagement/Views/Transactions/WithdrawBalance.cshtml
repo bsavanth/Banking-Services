@@ -1,0 +1,74 @@
+﻿@model BankManagement.ViewModels.BalanceWithdrawViewModel
+@{
+    ViewData["Title"] = "WithdrawBalance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>WithdrawBalance</h1>
+
+
+
+
+
+
+<br />
+<br />
+
+<h2>Enter Account ID to begin the Withdraw</h2>
+<br />
+<form asp-action="WithdrawBalance">
+    <table class="table table-bordered">
+
+        <tr>
+            <td>
+                @Html.LabelFor(view => view.outAccountID)
+            </td>
+            <td>
+                <input type="number" asp-for="outAccountID" disabled />
+            </td>
+            <td>
+                <span asp-validation-for="outAccountID"></span>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                @Html.LabelFor(view => view.moneyToout)
+            </td>
+            <td>
+                <input type="number" asp-for="moneyToout" />
+            </td>
+            <td>
+                <span asp-validation-for="moneyToout"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" value="Withdraw Money" />
+            </td>
+
+        </tr>
+
+    </table>
+</form>
+
+@if (ViewBag.SenderMessage != null)
+{
+    @if (ViewBag.SenderMessage == "Display")
+    {
+        <p style="color:red"> Withdraw Account ID not found </p>
+    }
+}
+
+
+@if (ViewBag.NegativeBalance != null)
+{
+
+    @if (ViewBag.NegativeBalance == "Display")
+    {
+        <p style="color:red"> Money to be Withdraw cannot be negative </p>
+    }
+}
+

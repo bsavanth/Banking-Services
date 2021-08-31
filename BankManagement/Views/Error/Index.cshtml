@@ -1,0 +1,123 @@
+﻿@model PaginatedList<BankManagement.Models.Error>
+
+<head>
+
+
+</head>
+
+<body>
+   
+    <br />
+    <br />
+
+    <form id="centering" asp-action="Index" method="get">
+
+        <table align="center">
+            <tr>
+
+                <td>
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                        </div>
+                        <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-mb">
+                        &nbsp;
+                    </div>
+
+                </td>
+
+                <td>
+
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
+                        </div>
+                        <select name="searchField" select class="form-select" aria-label="Default select example" id="CID">
+                            <option value="ErrorID">ErrorID</option>
+                            <option value="Description">Description</option>
+                            <option value="PageDetail">Page Details</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group input-group-mb mb-3 col-xs-3">
+                        <input type="submit" value ="Search" class="btn btn-success btn-mb">
+                    </div>
+                    
+                </td>
+            </tr>
+
+        </table>
+
+
+    </form>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["ErrorIDSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Error ID</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DescriptionSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Description</a>
+
+                </th>
+
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["PageDetailSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Page Details</a>
+
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Error err in Model)
+            {
+                <tr>
+                    <td>
+                        @err.ErrorID
+                    </td>
+                    <td>
+                        @err.Description
+                    </td>
+                    <td>
+                        @err.PageDetail
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    
+    <table align="center">
+
+       
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <tr>
+            <td>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @prevDisabled">
+                    Previous
+                </a>
+            </td>
+            <td>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @nextDisabled">
+                    Next
+                </a>
+            </td>
+        </tr> 
+    </table>
+</body>

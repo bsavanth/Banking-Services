@@ -1,0 +1,110 @@
+﻿@model IEnumerable<BankManagement.Models.Customer>
+
+
+
+
+<table class="styled-table">
+    <thead>
+        <tr>
+
+            <th>
+                Customer ID
+            </th>
+
+            <th>
+                SSN
+            </th>
+
+            <th>
+                Name
+            </th>
+
+            <th>
+                Age
+            </th>
+
+            <th>
+                Address1
+            </th>
+
+            <th>
+                Address2
+
+            </th>
+
+            <th>
+                City
+
+            </th>
+
+            <th>
+                State
+            </th>
+
+            <th>
+                Last Updated
+            </th>
+
+            <th colspan="2" style="text-align: center;">
+                <a onclick="showInPopup('@Url.Action("AddOrUpdate","Customer",null,Context.Request.Scheme)','New Customer')" class="btn btn-danger btn-group-sm"><i class="fas fa-random"></i> Add New Customer</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Customer customer in Model)
+
+        {
+            <tr>
+
+                <td>
+                    @customer.CID
+                </td>
+
+                <td>
+                    @customer.SSN
+                </td>
+
+                <td>
+                    @customer.Name
+                </td>
+
+                <td>
+                    @customer.Age
+                </td>
+
+                <td>
+                    @customer.Address1
+                </td>
+
+                <td>
+                    @customer.Address2
+                </td>
+
+                <td>
+                    @customer.City
+                </td>
+
+                <td>
+                    @customer.State
+                </td>
+
+                <td>
+                    @customer.LastUpdated
+                </td>
+
+                <td>
+                    <a onclick="showInPopup('@Url.Action("AddOrUpdate","Customer",new {CID=customer.CID},Context.Request.Scheme)','Update Customer')" class="btn btn-info btn-group-sm"><i class="fas fa-pencil-alt"></i> Update</a>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@customer.CID" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                            <input type ="hidden" name="CID" value="@customer.CID"/>
+                             <button type ="submit" class="btn btn-danger btn-group-sm"><i class ="fas fa-minus-circle" ></i>Delete</button>
+                    </form> 
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>

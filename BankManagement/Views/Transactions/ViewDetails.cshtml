@@ -1,0 +1,60 @@
+﻿
+@using BankManagement.ViewModels
+@model AccountDetailsViewModel
+@{
+    ViewData["Title"] = "ViewDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Full Account Details</h1>
+<br />
+
+<h2>Customer Information:</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Customer ID</td>
+        <td>SSN</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Address</td>
+        <td>City</td>
+        <td>State</td>
+        <td>Last Updated</td>
+    </tr>
+    <tr>
+        <td>@Model.customer.CID</td>
+        <td>@Model.customer.SSN</td>
+        <td>@Model.customer.Name</td>
+        <td>@Model.customer.Age</td>
+        <td>@Model.customer.Address1</td>
+        <td>@Model.customer.City</td>
+        <td>@Model.customer.State</td>
+        <td>@Model.customer.LastUpdated</td>
+    </tr>
+</table>
+
+<h2>Account Information:</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Account ID</td>
+        <td>Customer ID</td>
+        <td>Type</td>
+        <td>Balance</td>
+        <td>Last Updated</td>
+    </tr>
+    <tr>
+        <td>@Model.account.AID</td>
+        <td>@Model.account.CID</td>
+        <td>@Model.account.AccountType</td>
+        <td>@Model.account.Balance</td>
+        <td>@Model.account.LastUpdated</td>
+    </tr>
+</table>
+<br />
+
+@Html.ActionLink("Back to View All", "ViewAll")
+
+

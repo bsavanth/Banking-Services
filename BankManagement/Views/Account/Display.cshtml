@@ -1,0 +1,41 @@
+﻿@model Account
+@{
+    ViewData["Title"] = "Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align: center;">
+    <h5>Account Details</h5>
+</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <td>Account ID</td>
+            <td>Customer ID</td>
+            <td>Account Type</td>
+            <td>Balance</td>
+            <td>Last Updated</td>
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>@Model.AID</td>
+            <td>@Model.CID</td>
+            <td>@Model.AccountType</td>
+            <td>@Model.Balance</td>
+            <td>@Model.LastUpdated</td>
+
+
+
+        </tr>
+
+    </tbody>
+</table>
+<div style="text-align: center;">
+
+
+    @Html.ActionLink("Back to Search", "Search")
+</div>

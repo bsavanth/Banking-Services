@@ -1,0 +1,135 @@
+﻿@using BankManagement.Models
+@model Customer
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+
+
+<form asp-action="Delete">
+
+
+
+    <table class="table table-bordered">
+        @Html.HiddenFor(Customer => Customer.CID)
+        @Html.HiddenFor(Customer => Customer.SSN)
+
+
+
+
+
+
+        <tr>
+            <td>
+                @Html.LabelFor(customer => customer.Name)
+            </td>
+            <td>
+                @Model.Name
+            </td>
+        </tr>
+
+
+
+
+        <tr>
+
+            <td>
+                @Html.LabelFor(customer => customer.Age)
+            </td>
+            <td>
+                @Model.Age
+            </td>
+        </tr>
+
+
+
+
+        <tr>
+            <td>
+                @Html.LabelFor(Customer => Customer.Address1)
+            </td>
+            <td>
+                @Model.Address1
+            </td>
+        </tr>
+
+
+
+
+
+
+        <tr>
+            <td>
+                @Html.LabelFor(Customer => Customer.Address2)
+            </td>
+            <td>
+                @Model.Address2
+            </td>
+        </tr>
+
+
+
+
+
+        <tr>
+            <td>
+                @Html.LabelFor(Customer => Customer.City)
+            </td>
+            <td>
+                @Model.City
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                @Html.LabelFor(Customer => Customer.State)
+            </td>
+            <td>
+                @Model.State
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(Customer => Customer.LastUpdated)
+            </td>
+            <td>
+                @Model.LastUpdated
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.ActionLink("Back to ViewAll", "ViewAll")
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Delete Employee Record" />
+
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+
+
+@if (ViewBag.Message != null)
+{
+    @if (ViewBag.Message == "Display")
+    {
+        <p style="color:green"> Customer details have been Delete Successfully </p>
+    }
+    else
+    {
+        <p style="color:red"> Customer details could not be Delete </p>
+    }
+}
+
+

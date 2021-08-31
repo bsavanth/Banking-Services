@@ -1,0 +1,86 @@
+﻿@using BankManagement.ViewModels;
+@model DepositViewModel
+@{
+    ViewData["Title"] = "Deposit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="text-align: center;">
+<h1>Deposit Amount</h1>
+    </div>
+
+<form asp-action="Deposit">
+
+
+    <table class="styled-table">
+        <tr>
+            <td>
+                <label asp-for="Account.AID"></label>
+
+            </td>
+            <td>
+                <input type="text" value="@Model.Account.AID" asp-for="@Model.Account.AID" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Account.CID"></label>
+
+            </td>
+            <td>
+                <input type="text" value="@Model.Account.CID" asp-for="@Model.Account.CID" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Account.AccountType"></label>
+
+            </td>
+            <td>
+                <input type="text" value="@Model.Account.AccountType" asp-for="@Model.Account.AccountType" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Account.Balance"></label>
+
+            </td>
+            <td>
+                <input type="text" value="@Model.Account.Balance" asp-for="@Model.Account.Balance" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Account.LastUpdated"></label>
+
+            </td>
+            <td>
+                <input type="text" value="@Model.Account.LastUpdated" asp-for="@Model.Account.LastUpdated" readonly />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Deposit Amount </label>
+
+            </td>
+            <td>
+                <input type="number" asp-for="@Model.amount" required min="1" />
+            </td>
+        </tr>
+    </table>
+    <div style="text-align: center;">
+        <button type="submit">Deposit</button>
+        </div>
+
+</form>
+
+@if (ViewBag.Message != null)
+{
+    @if (ViewBag.Message == "Success")
+    {
+        <p style="color:green"> Deposit Successful </p>
+        }
+    }
+
+
+

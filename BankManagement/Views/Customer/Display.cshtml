@@ -1,0 +1,73 @@
+﻿@model Customer
+    <div style="text-align: center;">
+        <h5>Customer Details</h5>
+        </div>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <td>Customer ID</td>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>SSN</td>
+                    <td>Address1</td>
+                    <td>Address2</td>
+                    <td>City</td>
+                    <td>State</td>
+                    <td>Last Updated</td>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+
+
+                <tr>
+
+                    <td>
+                        @Model.CID
+                    </td>
+
+                    <td>
+                        @Model.Name
+                    </td>
+
+                    <td>
+                        @Model.Age
+                    </td>
+
+                    <td>
+                        @Model.SSN
+                    </td>
+
+
+                    <td>
+                        @Model.Address1
+                    </td>
+
+                    <td>
+                        @Model.Address2
+                    </td>
+                    <td>
+                        @Model.City
+                    </td>
+                    <td>
+                        @Model.State
+                    </td>
+
+
+
+                    <td>
+                        @Model.LastUpdated
+                    </td>
+
+
+
+                </tr>
+
+            </tbody>
+
+        </table>
+        <div style="text-align: center;">
+            @Html.ActionLink("Back to Search", "Search")
+            </div>

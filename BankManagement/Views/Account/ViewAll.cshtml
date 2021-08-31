@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@model IEnumerable<Account>
+@{
+    ViewData["Title"] = "ViewAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 style="text-align: center;">View All Accounts</h1>
+
+<div class="text-center">
+
+    <input type="search" id="searchrec" class="search" placeholder="Search Accounts..." />
+
+    <table class="styled-table" id="table1">
+        <thead>
+            <tr>
+                <td>Account ID</td>
+                <td>Customer ID</td>
+                <td>Account Type</td>
+                <td>Details</td>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Account a in Model)
+            {
+                <tr>
+                    <td>@a.AID</td>
+                    <td>@a.CID</td>
+                    <td>@a.AccountType</td>
+                    <td>@Html.ActionLink("Details", "ViewDetails", a)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <table align="center">
+        <tr>
+            <td>
+                @Html.ActionLink("Back to Index", "Index")
+            </td>
+        </tr>
+    </table>
+    <br />
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+        $(".search").on("keyup", function ()
+        {
+            var datasearch = $(this).val().toLowerCase();
+            $("#table1 tr").each(function () {
+                var stringdata = $(this).text().toLowerCase();
+                if (stringdata.indexOf(datasearch) === -1)
+                {
+                    $(this).hide();
+                }
+                else {
+
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
+

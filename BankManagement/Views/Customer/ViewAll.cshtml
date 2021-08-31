@@ -1,0 +1,91 @@
+﻿
+@model IEnumerable<Customer>
+
+<head>
+    <link href="~/css/Common/CommonStyle.css" rel="stylesheet" />
+</head>
+
+<h5>All Customers Detail</h5>
+<div style="text-align: center;">
+    <a href="https://localhost:5001/Customer/Add"><button style="background-color: #009879; color: #ffffff;" type="button">Add New Customer</button></a>
+</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <td>Customer ID</td>
+            <td>Name</td>
+            <td>Age</td>
+            <td>SSN</td>
+            <td>Address1</td>
+            <td>Address2</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Last Updated</td>
+            <th colspan="2" style="text-align: center;">
+                Actions
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (Customer customer in Model)
+
+            {
+        <tr>
+
+            <td>
+                @customer.CID
+            </td>
+
+            <td>
+                @customer.Name
+            </td>
+
+            <td>
+                @customer.Age
+            </td>
+
+            <td>
+                @customer.SSN
+            </td>
+
+
+            <td>
+                @customer.Address1
+            </td>
+
+            <td>
+                @customer.Address2
+            </td>
+            <td>
+                @customer.City
+            </td>
+            <td>
+                @customer.State
+            </td>
+            <td>
+                @customer.LastUpdated
+            </td>
+            <td>
+
+                <form asp-action="UpdateFromViewAll" method="get">
+                    <input type="hidden" name="CID" value=@customer.CID />
+                    <button type="submit" class="btn btn-success btn-group-sm">Update</button>
+                </form>
+            </td>
+
+            <td>
+                <form asp-action="Delete" method="get">
+                    <input type="hidden" name="CID" value=@customer.CID />
+                    <button type="submit" class="btn btn-danger btn-group-sm">Delete</button>
+                </form>
+            </td>
+
+
+        </tr>
+            }
+    </tbody>
+
+</table>
+

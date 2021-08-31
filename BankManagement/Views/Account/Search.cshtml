@@ -1,0 +1,50 @@
+﻿@using BankManagement.ViewModels;
+
+@model FormViewModel; 
+
+<h1>Search Account</h1>
+<b>Search By Account ID Or Customer ID:</b>
+
+<form asp-action="Search">
+    <input type="text" asp-for="ID" />
+
+    <select asp-for="selection">
+        <option value="CID">CID</option>
+
+        <option value="AID">AID</option>
+
+    </select>
+
+    <input type="submit" value="Search" />
+</form>
+
+@if (ViewBag.AIDMessage != null)
+
+{
+    @if (ViewBag.AIDMessage == "DoNotDisplay")
+    {
+        <table align="center">
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm"> Account ID not in the database </button>
+                </td>
+            </tr>
+        </table>
+    }
+}
+@if (ViewBag.CIDMessage != null)
+{
+    @if (ViewBag.CIDMessage == "DoNotDisplay")
+    {
+        <table align="center">
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm"> Customer ID not in the database </button>
+                </td>
+            </tr>
+        </table>
+    }
+}
+
+
+@Html.ActionLink("Back to Index", "Index")

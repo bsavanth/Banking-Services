@@ -1,0 +1,218 @@
+﻿@using BankManagement.ViewModels
+@model TransStatementViewModel
+
+@{ 
+    Layout = null;
+}
+
+<head>
+
+    <title>Get Statement</title>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Common/CommonStyle.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $('#selectid').select2({
+
+        });
+    });
+</script>
+
+<body>
+
+
+    <div class="container">
+
+        <p></p>
+
+        <div class="navbar">
+            <p></p>
+
+            <a class="active" asp-controller="Home" asp-action="Index">Welcome to the ILP Bank </a>
+            <partial name="_LoginPartial" />
+            <p></p>
+        </div>
+        <br />
+
+        <div class="navbarfirstchild">
+
+            @if (User.IsInRole("CustomerExecutive") || User.IsInRole("AccountExecutive") || User.IsInRole("Admin"))
+            {
+                <a asp-controller="Customer" asp-action="Index">Customer Menu</a>
+                <a asp-controller="Account" asp-action="Index">Account Menu</a>
+            }
+            @if (User.IsInRole("Teller") || User.IsInRole("Cashier") || User.IsInRole("Admin"))
+            {
+                <a asp-controller="Transactions" asp-action="Index">Transactions Menu</a>
+
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Error" asp-action="Index">Error Log</a>
+            }
+        </div>
+
+        <br />
+
+        <div class="container text-center">
+
+            <h2>Get Transaction Statement</h2><br />
+
+            <form asp-action="GetStatement">
+
+
+
+
+                <table align="center">
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"><b>Account ID:</b></span>
+                                </div>
+                                &nbsp;
+                                <select asp-for="formModel.ID"
+                                        asp-items="@(new SelectList(Model.accountList,"AID","AID"))" id="selectid" style="width: 120px;" required></select>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"><b>Enter N transactions:</b></span>
+                                    &nbsp;
+                                </div>
+                                <input type="number" asp-for="formModel.Ntrans" min="1" max="10" />
+                            </div>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"><b>Start Date:</b></span>
+                                </div>
+                                &nbsp;
+                                <input type="date" asp-for="formModel.StartDate" />
+                            </div>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm"><b>End Date:</b></span>
+                                </div>
+                                &nbsp;
+                                <input type="date" asp-for="formModel.EndDate" />
+                            </div>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <button type="submit" class="btn btn-success btn-lg" >Get Statement</button>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </form>
+
+            <br />
+
+            <a href="https://localhost:5001/Transactions/Index"><button type="submit" class="btn btn-success btn-lg">Return to Transactions Menu</button></a>
+
+        </div>
+
+        <br />
+</body>
+
+@if (ViewBag.Message != null)
+{
+    @if (ViewBag.Message == "Success")
+    {
+        <table align="center">
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-dark btn-sm"> Get Statement Successful </button>
+                </td>
+            </tr>
+        </table><br />
+    }
+    else if (ViewBag.Message == "FormatFailure")
+    {
+        <table align="center">
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm"> Get Statement Failed </button>
+                    <button type="button" class="btn btn-danger btn-sm">Invalid Inputs Submitted </button>
+                </td>
+            </tr>
+        </table><br />
+    }
+    else if (ViewBag.Message == "NoResults")
+    {
+        <p style="text-align: center;"> No results found with given search </p><br />
+    }
+    else
+    {
+        <table align="center">
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm"> Start Date must be BEFORE End Date </button>
+                </td>
+            </tr>
+        </table><br />
+    }
+}
+
+
+@if (Model.transList != null)
+{
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <td>Type</td>
+                <td>Amount</td>
+                <td>Date</td>
+                <td>Description</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Transactions t in Model.transList)
+            {
+                <tr>
+                    <td>@t.TransactionType</td>
+                    <td>@t.TransactionAmount</td>
+                    <td>@t.Date</td>
+                    <td>@t.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

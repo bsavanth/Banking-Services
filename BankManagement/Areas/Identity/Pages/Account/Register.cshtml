@@ -1,0 +1,120 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<head>
+    <link href="./css/Common/CommonStyle.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <br />
+    <br />
+    <br />
+    <div class="container">
+
+        <div class="jumbotron text-center">
+            <h1 style="color:red;" class="display-4"><b>Add Employee</b></h1>
+            <p class="lead">Start here if you are authorized</p>
+            <hr class="my-4">
+            <br />
+            <br />
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                <table align="center">
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+                                </div>
+                                &nbsp;
+                                <input required type="email" asp-for="Input.Email" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span style="color:red" asp-validation-for="Input.Email" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Password</span>
+                                </div>
+                                &nbsp;
+                                <input required type="password" asp-for="Input.Password" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span style="color:red" asp-validation-for="Input.Password" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Confirm Password</span>
+                                </div>
+                                &nbsp;
+                                <input required type="password" asp-for="Input.ConfirmPassword" id="Name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span style="color:red" asp-validation-for="Input.ConfirmPassword" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="input-group input-group-mb mb-3 col-xs-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Role</span>
+                                </div>
+                                &nbsp;
+                                <select asp-for="Input.Role" select class="form-select " aria-label="Default select example" id="CID">
+                                    <option value="Cashier">Cashier</option>
+                                    <option value="Teller">Teller</option>
+                                    <option value="AccountExecutive">AccountExecutive</option>
+                                    <option value="CustomerExecutive">CustomerExecutive</option>
+                                </select>
+                                &nbsp;
+                                <div class="input-group-prepend">
+                                    <span style="color:red" asp-validation-for="Input.Role" class="input-group-text" id="inputGroup-sizing-sm"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Add Employee</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+
+        </div>
+    </div>
+            
+</body>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
